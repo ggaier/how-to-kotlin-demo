@@ -39,7 +39,7 @@ fun test2(e: Example): String{
 //号组合起来
 fun test3(e: Example): String{
     return when(e.a){
-        1 ,3 -> "odd"
+        1, 3 -> "odd"
         in setOf(2, 4) -> "even" //在collections或者range 中使用 in 关键字
         else -> "too big"
     }
