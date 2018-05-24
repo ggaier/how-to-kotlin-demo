@@ -1,6 +1,5 @@
 package com.github.ggaier.howtokotlin._01_classes;
 
-import com.github.ggaier.howtokotlin._03_functions.StringUtil;
 import com.github.ggaier.howtokotlin._03_functions.StringUtilKt;
 import kotlin.text.StringsKt;
 
