@@ -3,10 +3,10 @@ package com.github.ggaier.howtokotlin._01_classes
 /**
  * Created by wenbo, 2018/5/17
  *
+ * data class 会自动做一下的操作。
  * 1. equals()/hashCode() pair;
  * 2. toString() of the form "User(name=John, age=42)";
- * 3. componentN() functions corresponding to the properties in their order of declaration;
- * 4. copy() function (see below).
+ * 3. componentN() functions corresponding to the properties in their order of declaration; declaration 能够方便的析构一个 data 对象的 filed。
  */
 data class FullName(val first: String, val last: String)
 
