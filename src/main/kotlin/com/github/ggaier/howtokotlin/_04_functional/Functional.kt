@@ -5,6 +5,9 @@ package com.github.ggaier.howtokotlin._04_functional
  */
 fun main(args: Array<String>) {
     //range expression, .. 操作符 或者是 rangeTo 方法, 创建一个 range。
+    (1..100 step 1).forEach{
+        println("it")
+    }
     val numbers = (1..100).toList()
     1.rangeTo(100)
 

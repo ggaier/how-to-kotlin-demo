@@ -1,28 +1,42 @@
 package com.github.ggaier.howtokotlin._04_functional
 
-class Example(val a: Int, val b : String?, val c: Boolean)
+import com.github.ggaier.howtokotlin._01_classes.JPerson
+import com.github.ggaier.howtokotlin._03_functions.isOdd
+
+data class Example(val a: Int, val b : String?, val c: Boolean)
 
 fun main(args: Array<String>) {
 
     val ex = Example(1, null, true)
     var name = "wenbo"
+    val (first, middle, last) = ex
 
     //Kotlin standard function. with, apply, let, run, also
-    with(ex) {
+    val result: Boolean = with(ex) {
         println("a = $a, b= $b, c=$c")
+        println("a = ${isOdd(2)}, b= $b, c=$c")
+        true
     }
+
+    val theEx = ex.apply {
+        println(ex)
+    }
+    assert(theEx==ex)
 
     //declaration
     val (a, b) = Pair(1,2)
+    val (c, d) = 1 to 2
 
     val map = mapOf("k1" to 1,
             "k2" to 2,
             "k3" to 3)
 
+
     // Destructuring declarations, 把一个对象解构成一组变量。
     for((key, value) in map.entries){
         println(" key $key, value $value")
     }
+    test5(null)
 }
 
 fun test2(e: Example): String{
@@ -54,9 +68,22 @@ fun test4(e: Example): String = when(e.a){
 
 // kotlin 中的 nullability
 fun test5(str: String?): String?{
+    val a: String? = null
+    a?.toInt()
+    val b: String = "2"
+    b.toInt()
+
+//    a!!.toInt()
+
+    val nullablePerson = JPerson()
+    nullablePerson.name = null
+    nullablePerson.age = null
+
+    println("jperson age: ${nullablePerson.age?.toInt()}")
+
     //主要有三种处理方式
     //1. 使用 !! 操作符, 这样如果 receiver 是空的情况下， 会抛出 NullPointerException
-    println(str!!.length)
+//    println(str!!.length)
 
     //2. 使用safe call
     println(str?.length)

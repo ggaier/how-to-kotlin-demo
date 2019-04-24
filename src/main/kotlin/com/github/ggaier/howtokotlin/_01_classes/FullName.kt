@@ -14,8 +14,8 @@ data class FullName(val first: String, val last: String)
 
 fun main(args: Array<String>) {
     val name = parseName("Jiang Wenbo")
-    //    val first = name[0]
-    //    val last = name[1]
+//        val first = name[0]
+//        val last = name[1]
     val first = name.first
     val last = name.last
     println("$first, $last")

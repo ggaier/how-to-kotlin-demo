@@ -2,13 +2,14 @@ package com.github.ggaier.howtokotlin._03_functions
 
 /**
  * 方法的重载和 Extension Function
+ * //默认 StringUtil01 是单例
  */
 object StringUtil01{
 
-//    fun getFirstWord(s: String, separator: String): String {
-//        val index = s.indexOf(separator)
-//        return if (index < 0) s else s.substring(0, index)
-//    }
+    fun getFirstWord(s: String, separator: String): String {
+        val index = s.indexOf(separator)
+        return if (index < 0) s else s.substring(0, index)
+    }
 //    fun getFirstWord(s: String, separator: String = " "): String {
 //        val index = s.indexOf(separator)
 //        return if (index < 0) s else s.substring(0, index)
@@ -18,6 +19,10 @@ object StringUtil01{
 //        return getFirstWord(s, " ")
 //    }
 
+}
+
+fun test2(){
+    StringUtil01.getFirstWord("test", ",")
 }
 
 /**

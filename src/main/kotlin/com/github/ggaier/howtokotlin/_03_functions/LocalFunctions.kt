@@ -1,10 +1,14 @@
 package com.github.ggaier.howtokotlin._03_functions
 
-import com.sun.corba.se.impl.protocol.giopmsgheaders.FragmentMessage
+import com.github.ggaier.howtokotlin._01_classes.FullName
 
+/**
+ * sealed class: 子类必须和父类声明在同一个地方.
+ */
 sealed class Element
 class Container(vararg val children: Element): Element()
 class Text(val text: String): Element()
+class Container2(vararg val children: Element, val fullName: FullName): Element()
 
 fun Element.extractText(): String{
     return extractText(this, StringBuilder()).toString()
@@ -12,9 +16,10 @@ fun Element.extractText(): String{
 
 fun extractText(e: Element, sb: StringBuilder): StringBuilder {
     if(e is Text){// smart cast, only for val
-        sb.append(e.text)
-    }else if(e is Container){
+        sb.append((e.text))
+    }else if(e is Container2){
         for(child in e.children){
+            val (first, last) = e.fullName
             extractText(child, sb)
         }
     }else{
@@ -38,6 +43,11 @@ fun Element.extractText1(): String {
         return sb
     }
     return extractText(this, sb).toString()
+}
+
+val element1 = Text("element1")
+fun testExtensionFuntion(){
+    element1.extractText1()
 }
 
 fun Element.extractText2(): String {
@@ -65,7 +75,10 @@ fun Element.extractText2(): String {
 fun Element.extractText3(): String {
     val sb = StringBuilder()
     fun extractText(e: Element){
+        // switch
         when (e) {
+            is Container2 -> print("container")
+            //expression
             is Text -> // smart cast, only for val
             {sb.append(e.text)
                 println()
@@ -74,14 +87,31 @@ fun Element.extractText3(): String {
                 extractText(child, sb)
             }
         }
+        when {
+            e is Container2 -> print("container2")
+            "a"==e.toString() -> print("true")
+        }
     }
     extractText(this)
     return sb.toString()
 }
 
-val isOdd: (Int) -> Boolean = { it % 2 != 0 }
-fun isOdd(x: Int): Boolean = x % 2 != 0
-val odds  = listOf(1,2,3).filter(::isOdd)
+val lambda1: (param1: String, param2: Int) -> FullName = {
+    param1, param2 ->
+    FullName(param1, param2.toString())
+}
+val isOdd: (Int) -> Boolean = {
+    it % 2 != 0
+}
+fun isOdd2(x: Int): Boolean {
+    return  x % 2 != 0
+}
+fun isOdd(x: Int) = x % 2 != 0
+
+//
+val odds  = listOf(1,2,3)
+        .filter(::isOdd)
+        .forEach { println(it)}
 val odds2 = listOf(1,2,3).filter(isOdd)
 val odds3 = listOf(1,2,3).filter {
     it%2 !=0
@@ -133,3 +163,14 @@ fun Element.extractText5(): String {
  * evernote。
  */
 
+
+inline fun testInline(process:(String)->Unit){
+    process("a")
+    println("complete")
+}
+
+fun test(){
+    testInline {
+        it.toInt()
+    }
+}
